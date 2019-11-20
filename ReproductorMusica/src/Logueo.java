@@ -1,4 +1,3 @@
-package Login;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -84,16 +83,16 @@ public class Logueo extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				char [] contraseña = jpassClave.getPassword();
-				String contraseñaFinal = new String (contraseña);
+				char [] contrasena = jpassClave.getPassword();
+				String contrasenaFinal = new String (contrasena);
 				String user = textUser.getText();
 				
-				if (textUser.getText().equals("Miguel") && contraseñaFinal.contentEquals("12345")) {
+				if (textUser.getText().equals("Miguel") && contrasenaFinal.contentEquals("12345")) {
 					dispose();
 					Main p = new Main();
 					p.setVisible(true);
 				}else {
-					JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "ERROR",
+					JOptionPane.showMessageDialog(null, "Usuario o Contraseï¿½a incorrectos", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 					textUser.setText("");
 					jpassClave.setText("");
