@@ -39,7 +39,6 @@ public class Logueo extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -89,7 +88,7 @@ public class Logueo extends JFrame {
 				
 				if (textUser.getText().equals("Miguel") && contrasenaFinal.contentEquals("12345")) {
 					dispose();
-					Main p = new Main();
+					VentanaPrincipal p = new VentanaPrincipal();
 					p.setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "Usuario o Contrasena incorrectos", "ERROR",
@@ -105,16 +104,5 @@ public class Logueo extends JFrame {
 		btnLoguear.add(btnLogin);
 	}
 	
-	btnLogin.
-	
-	btnLogin.addActionListener (new ActionListener){
-		public void actionPerformed(ActionEvent e) {
-			VentanaPrincipal vp = new VentanaPrincipal();
-			vp.setVisible (true);
-			
-		
-	}
-	
-	}
 }
 	

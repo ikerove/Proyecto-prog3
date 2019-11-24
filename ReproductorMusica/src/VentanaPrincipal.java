@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 
-public class VentanaPrincipal extends Logueo {
+public class VentanaPrincipal extends JFrame {
  //prueba
 	
 	private JFrame frame;
@@ -72,32 +72,25 @@ public class VentanaPrincipal extends Logueo {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void Ventanaprincipal(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
+					VentanaPrincipal frame = new VentanaPrincipal();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the application.
 	 */
-	VentanaPrincipal(){};
 	
 	public VentanaPrincipal() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 573, 329);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
