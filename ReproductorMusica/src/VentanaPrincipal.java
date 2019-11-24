@@ -18,7 +18,7 @@ import javax.swing.JMenu;
 
 public class VentanaPrincipal extends JFrame {
  //prueba
-	
+	private JPanel contentPane;
 	private JFrame frame;
 	private final JButton btnPlaypausa = new JButton("Play/Pausa");
 	private final JMenuBar menuBar = new JMenuBar();
@@ -72,7 +72,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void Ventanaprincipal(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
