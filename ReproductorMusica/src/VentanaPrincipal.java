@@ -16,8 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 
-public class VentanaPrincipal {
+public class VentanaPrincipal extends Logueo {
  //prueba
+	
 	private JFrame frame;
 	private final JButton btnPlaypausa = new JButton("Play/Pausa");
 	private final JMenuBar menuBar = new JMenuBar();
@@ -87,6 +88,8 @@ public class VentanaPrincipal {
 	/**
 	 * Create the application.
 	 */
+	VentanaPrincipal(){};
+	
 	public VentanaPrincipal() {
 		initialize();
 	}

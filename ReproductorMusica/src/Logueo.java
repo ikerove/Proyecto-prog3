@@ -92,7 +92,7 @@ public class Logueo extends JFrame {
 					Main p = new Main();
 					p.setVisible(true);
 				}else {
-					JOptionPane.showMessageDialog(null, "Usuario o Contrase�a incorrectos", "ERROR",
+					JOptionPane.showMessageDialog(null, "Usuario o Contrasena incorrectos", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 					textUser.setText("");
 					jpassClave.setText("");
@@ -104,4 +104,17 @@ public class Logueo extends JFrame {
 		btnLogin.setBounds(168, 180, 97, 25);
 		btnLoguear.add(btnLogin);
 	}
+	
+	btnLogin.
+	
+	btnLogin.addActionListener (new ActionListener){
+		public void actionPerformed(ActionEvent e) {
+			VentanaPrincipal vp = new VentanaPrincipal();
+			vp.setVisible (true);
+			
+		
+	}
+	
+	}
 }
+	
