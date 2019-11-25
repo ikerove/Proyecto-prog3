@@ -1,3 +1,4 @@
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,8 +25,7 @@ public class VentanaPrincipal extends JFrame {
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JLabel lblLogo_1 = new JLabel("Logo");
 	
-	
-	
+
 	private final JPanel panel_1 = new JPanel((new GridLayout(2,1)));
 	private final JPanel p1Arriba = new JPanel();
 	private final JPanel p1Abajo = new JPanel();
