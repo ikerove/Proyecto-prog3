@@ -1,16 +1,21 @@
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import mantenimientos.GestionUsuario;
+import mantenimientos.Usuario;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -82,11 +87,20 @@ public class Logueo extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				char [] contrasena = jpassClave.getPassword();
-				String contrasenaFinal = new String (contrasena);
+				//char [] contrasena = jpassClave.getPassword();
+				//String contrasenaFinal = new String (contrasena);
+				String contrasenaFinal = String.valueOf(jpassClave.getPassword());
 				String user = textUser.getText();
 				
-				if (textUser.getText().equals("Miguel") && contrasenaFinal.contentEquals("12345")) {
+				GestionUsuario gestionUsuario = new GestionUsuario();
+				
+				Usuario usuario2 = new Usuario();
+				usuario2.setNombre_usuario(user);
+				usuario2.setContrasenya_usuario(contrasenaFinal);
+				
+				Usuario usu = gestionUsuario.obtenerUsuario(usuario2);
+				
+				if (usu != null) {
 					dispose();
 					VentanaPrincipal p = new VentanaPrincipal();
 					p.setVisible(true);
@@ -98,6 +112,18 @@ public class Logueo extends JFrame {
 					textUser.requestFocus();
 				}
 				
+				/*if (textUser.getText().equals("Miguel") && contrasenaFinal.contentEquals("12345")) {
+					dispose();
+					VentanaPrincipal p = new VentanaPrincipal();
+					p.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Usuario o Contrasena incorrectos", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+					textUser.setText("");
+					jpassClave.setText("");
+					textUser.requestFocus();
+				}
+				*/
 			}
 		});
 		btnLogin.setBounds(168, 180, 97, 25);

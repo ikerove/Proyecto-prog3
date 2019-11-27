@@ -1,3 +1,4 @@
+package mantenimientos;
 
 
 	public class Usuario {
@@ -9,9 +10,9 @@
     private String correo_usuario;
     
     public Usuario (){
-    	super();
+    	//super();
     }
-    public Usuario(int idUsuario, String nombre_usuario, int tipo_usuario, String contrasenya_usuario) {
+    public Usuario(int idUsuario, String nombre_usuario, int tipo_usuario, String contrasenya_usuario, String correo_usuario) {
     	super();
     	this.idUsuario = idUsuario;
     	this.nombre_usuario = nombre_usuario;
@@ -27,24 +28,24 @@
     	this.idUsuario = idUsuario;
     }
 	
-    public String getnombre_usuario() {
+    public String getNombre_usuario() {
 		return nombre_usuario;
 	}
-	public void setnombre_usuario(String nombre_usuario) {
+	public void setNombre_usuario(String nombre_usuario) {
 		this.nombre_usuario = nombre_usuario;
 	}
 	
-	public int gettipo_usuario() {
+	public int getTipo_usuario() {
 		return tipo_usuario;
 	}
-	public void settipo_usuario(int tipo_usuario) {
+	public void setTipo_usuario(int tipo_usuario) {
 		this.tipo_usuario = tipo_usuario;
 	}
 
-	public String getcontrasenya_usuario() {
+	public String getContrasenya_usuario() {
 		return contrasenya_usuario;
 	}
-	public void setcontrasenya_usuario(String contrasenya_usuario) {
+	public void setContrasenya_usuario(String contrasenya_usuario) {
 		this.contrasenya_usuario = contrasenya_usuario;
 	}
     
