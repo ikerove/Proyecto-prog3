@@ -52,6 +52,7 @@ public class Logueo extends JFrame {
 		setSize(430, 300);
 		setResizable(false);
 		setLocationRelativeTo (null);
+		
 		btnLoguear = new JPanel();
 		btnLoguear.setBackground(new Color(192, 192, 192));
 		btnLoguear.setBorder(new EmptyBorder(5, 5, 5, 5));

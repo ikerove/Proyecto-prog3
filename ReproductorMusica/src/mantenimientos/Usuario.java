@@ -10,7 +10,7 @@ package mantenimientos;
     private String correo_usuario;
     
     public Usuario (){
-    	//super();
+    	super();
     }
     public Usuario(int idUsuario, String nombre_usuario, int tipo_usuario, String contrasenya_usuario, String correo_usuario) {
     	super();

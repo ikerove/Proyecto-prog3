@@ -19,7 +19,8 @@ public class GestionUsuario {
 		
 		try {
 		con = MySQLConexion.getConexion();
-		String sql = "select*from Usuario where usuario = ? and clave = ?";
+		//String sql = "select*from usuario where usuario = ? and con = ?";
+		String sql = "select*from Usuario where nombre_usuario = ? and contrasenya_usuario = ?";
 		pst = con.prepareStatement(sql);
 		
 		pst.setString(1, usu.getNombre_usuario());

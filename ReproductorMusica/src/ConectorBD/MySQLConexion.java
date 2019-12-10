@@ -12,7 +12,7 @@ public class MySQLConexion {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url ="jdbc:mysql://localhost/BD_Proyecto";
 			String usuario = "root";
-			String contrasena = "admin";
+			String contrasena = "";
 			
 			con = DriverManager.getConnection(url,usuario,contrasena);
 			
