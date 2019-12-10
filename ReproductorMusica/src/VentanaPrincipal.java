@@ -21,53 +21,53 @@ public class VentanaPrincipal extends JFrame {
  //prueba
 	private JPanel contentPane;
 	private JFrame frame;
-	private final JButton btnPlaypausa = new JButton("Play/Pausa");
-	private final JMenuBar menuBar = new JMenuBar();
-	private final JLabel lblLogo_1 = new JLabel("Logo");
+	private JButton btnPlaypausa = new JButton("Play/Pausa");
+	private JMenuBar menuBar = new JMenuBar();
+	private JLabel lblLogo_1 = new JLabel("Logo");
 	
 
-	private final JPanel panel_1 = new JPanel((new GridLayout(2,1)));
-	private final JPanel p1Arriba = new JPanel();
-	private final JPanel p1Abajo = new JPanel();
+	private JPanel panel_1 = new JPanel((new GridLayout(2,1)));
+	private JPanel p1Arriba = new JPanel();
+	private JPanel p1Abajo = new JPanel();
 	/**
 	 * @wbp.nonvisual location=340,391
 	 */
-	private final JPanel panel_2 = new JPanel((new GridLayout(2,1)));
-	private final JPanel p2Arriba = new JPanel();
-	private final JPanel p2Abajo = new JPanel();
+	private JPanel panel_2 = new JPanel((new GridLayout(2,1)));
+	private JPanel p2Arriba = new JPanel();
+	private JPanel p2Abajo = new JPanel();
 	/**
 	 * @wbp.nonvisual location=480,371
 	 */
-	private final JPanel panel_3 = new JPanel((new GridLayout(2,1)));
-	private final JPanel p3Arriba = new JPanel();
-	private final JPanel p3Abajo = new JPanel();
+	private JPanel panel_3 = new JPanel((new GridLayout(2,1)));
+	private JPanel p3Arriba = new JPanel();
+	private JPanel p3Abajo = new JPanel();
 	
 	
-	private final JLabel lblUnidad = new JLabel("Unidad");
-	private final JLabel lblPlaylist = new JLabel("Playlist");
-	private final JLabel lblAmigos = new JLabel("Amigos");
+	private JLabel lblUnidad = new JLabel("Unidad");
+	private JLabel lblPlaylist = new JLabel("Playlist");
+	private JLabel lblAmigos = new JLabel("Amigos");
 	/**
 	 * @wbp.nonvisual location=40,391
 	 */
-	private final JLabel lblCancion = new JLabel("Cancion");
+	private JLabel lblCancion = new JLabel("Cancion");
 	/**
 	 * @wbp.nonvisual location=340,391
 	 */
-	private final JPanel panel_4 = new JPanel((new GridLayout(2,1)));
-	private final JPanel p4Arriba = new JPanel();
-	private final JLabel lblCaratula = new JLabel("Caratula");
-	private final JButton btnAtras = new JButton("Atras");
-	private final JButton btnSiguiente = new JButton("Siguiente");
-	private final JPanel p4Abajo = new JPanel();
+	private JPanel panel_4 = new JPanel((new GridLayout(2,1)));
+	private JPanel p4Arriba = new JPanel();
+	private JLabel lblCaratula = new JLabel("Caratula");
+	private JButton btnAtras = new JButton("Atras");
+	private JButton btnSiguiente = new JButton("Siguiente");
+	private JPanel p4Abajo = new JPanel();
 	
-	private final JProgressBar pb = new JProgressBar();
-	private final JMenu mnNombre = new JMenu("Nombre");
-	private final JMenu mnArchivo = new JMenu("Archivo");
-	private final JMenu mnEdicion = new JMenu("Edicion");
-	private final JMenu mnVisualizacion = new JMenu("Visualizacion");
-	private final JMenu mnReproduccion = new JMenu("Reproduccion");
-	private final JMenu mnVentana = new JMenu("Ventana");
-	private final JMenu mnAcercaDeProg = new JMenu("Acerca de prog");
+	private JProgressBar pb = new JProgressBar();
+	private JMenu mnNombre = new JMenu("Nombre");
+	private JMenu mnArchivo = new JMenu("Archivo");
+	private JMenu mnEdicion = new JMenu("Edicion");
+	private JMenu mnVisualizacion = new JMenu("Visualizacion");
+	private JMenu mnReproduccion = new JMenu("Reproduccion");
+	private JMenu mnVentana = new JMenu("Ventana");
+	private JMenu mnAcercaDeProg = new JMenu("Acerca de prog");
 
 	/**
 	 * Launch the application.
@@ -94,6 +94,8 @@ public class VentanaPrincipal extends JFrame {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 573, 329);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(700, 500);
+		setLocationRelativeTo (null);
 		
 		frame.setJMenuBar(menuBar);
 		

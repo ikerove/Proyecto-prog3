@@ -24,7 +24,7 @@ public class GestionUsuario {
 		pst = con.prepareStatement(sql);
 		
 		pst.setString(1, usu.getNombre_usuario());
-		pst.setString(1, usu.getContrasenya_usuario());
+		pst.setString(2, usu.getContrasenya_usuario());
 		
 		rs = pst.executeQuery();
 		
