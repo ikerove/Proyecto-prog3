@@ -20,6 +20,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Logueo extends JFrame {
@@ -28,6 +30,8 @@ public class Logueo extends JFrame {
 	private JPasswordField jpassClave;
 	private JTextField textUser;
 	private JButton btnLogin;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -48,6 +52,9 @@ public class Logueo extends JFrame {
 	 * Create the frame.
 	 */
 	public Logueo() {
+		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(430, 300);
 		setResizable(false);
@@ -129,6 +136,7 @@ public class Logueo extends JFrame {
 		});
 		btnLogin.setBounds(168, 180, 97, 25);
 		btnLoguear.add(btnLogin);
+		
 		JButton btnNewButton = new JButton("¿No tienes cuenta? Entra aqui");
 		btnNewButton.setBounds(98, 228, 245, 29);
 		btnLoguear.add(btnNewButton);
@@ -143,8 +151,6 @@ public class Logueo extends JFrame {
 				
 			}
 		});
-
 	}
-	
 }
 	

@@ -25,6 +25,8 @@ public class NuevoUsuario extends JFrame {
 	private JButton btnNewButton;
 	
 	//private static JFrame Logueo;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -45,9 +47,9 @@ public class NuevoUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NuevoUsuario() {
+	public NuevoUsuario(/*JFrame lo */) {
 		
-		/*	JFrame l = this;
+	/*	JFrame l = this;
 		Logueo = lo;*/
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +111,6 @@ public class NuevoUsuario extends JFrame {
 				/*
 				l.dispose();
 				Logueo.setVisible(true);*/
-
 			}
 		});
 		

@@ -88,7 +88,6 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	
 	/*
 	public VentanaPrincipal() {
 		
