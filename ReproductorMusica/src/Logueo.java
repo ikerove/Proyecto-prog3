@@ -65,6 +65,7 @@ public class Logueo extends JFrame {
 		lblLogin.setBounds(114, 24, 189, 22);
 		btnLoguear.add(lblLogin);
 		
+		
 		JLabel lblUser = new JLabel("User :");
 		lblUser.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUser.setBounds(55, 76, 56, 16);

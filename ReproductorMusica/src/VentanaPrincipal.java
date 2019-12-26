@@ -16,6 +16,7 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
+import javax.swing.ImageIcon;
 
 public class VentanaPrincipal extends JFrame {
  //prueba
@@ -219,6 +220,7 @@ public VentanaPrincipal() {
 		p4Arriba.add(lblCaratula);
 		
 		p4Arriba.add(btnAtras);
+	//	btnPlaypausa.setIcon(new ImageIcon("/Users/ikerrodriguez/Downloads/Unknown"));
 		p4Arriba.add(btnPlaypausa);
 		
 		p4Arriba.add(btnSiguiente);
@@ -227,6 +229,9 @@ public VentanaPrincipal() {
 		p4Abajo.add(lblCancion);
 		p4Abajo.add(pb);
 		getContentPane().add(panel_4, BorderLayout.SOUTH);
+		
+		
+		//btnPlaypausa.setBounds(168,183,97,22);
 		
 	}
 
