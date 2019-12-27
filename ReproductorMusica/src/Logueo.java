@@ -128,24 +128,21 @@ public class Logueo extends JFrame {
 				*/
 			}
 		});
-		btnLogin.setBounds(168, 178, 97, 38);
+		btnLogin.setBounds(168, 180, 97, 25);
 		btnLoguear.add(btnLogin);
-		JButton btnNewButton = new JButton("Â¿No tienes cuenta? Entra aqui");
-		btnNewButton.setBounds(98, 228, 245, 29);
-		btnLoguear.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		JButton btnNuevoUser = new JButton("¿No tienes cuenta? Pincha aquí");
+		btnNuevoUser.addActionListener(new ActionListener() {
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-					nu.dispose();
-					NuevoUsuario.setVisible(true);
-				
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				NuevoUsuario p = new NuevoUsuario();
+				p.setVisible(true);
 			}
 		});
+		btnNuevoUser.setBounds(102, 227, 224, 23);
+		btnLoguear.add(btnNuevoUser);
 
 	}
-	
 }
 	
