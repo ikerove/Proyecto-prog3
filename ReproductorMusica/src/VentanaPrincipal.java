@@ -110,6 +110,19 @@ public class VentanaPrincipal extends JFrame {
 	
 	private final BasicPlayer Audio = new BasicPlayer();
 	private File archivo= null;
+	private final ArrayList<String> datos = new ArrayList<>();
+	
+	
+	 private final String fuente1="Georgia";
+	    private final String fuente2="Segoe Print";
+	    private boolean mute=false;
+	    private boolean bloquear=false;
+	    private boolean repitaCancion=false;
+	    private boolean siguiente=false;
+	    private float balance=0.5f;
+	    private float volumenM;
+	    private float volumen=0.8f;
+
 
 	/**
 	 * Launch the application.
@@ -171,14 +184,16 @@ public VentanaPrincipal() {
 		panel_2.add(p2Arriba);
 		panel_2.add(p2Abajo);
 		
-		p2Abajo.add(listaCanciones);
+		
 		
 		
 		
 		
 		p2Arriba.add(lblPlaylist);
 		//panel_2.setBorder(new EmptyBorder(5, 5, 5, 200));
+		p2Arriba.add(listaCanciones);
 		getContentPane().add(panel_2, BorderLayout.CENTER);
+		
 		
 		
 		panel_3.add(p3Arriba);
@@ -215,17 +230,17 @@ public VentanaPrincipal() {
 			           String ReproduceCancion = datos.get(indice);
 			           //System.out.println(ReproduceCancion);
 			           archivo = new File(ReproduceCancion);
-			           jSliderBalance.setEnabled(true);
-			           jSliderProgresoMp3.setEnabled(true);
+			         
+			           pb.setEnabled(true);
 				
-			           CaratulaCancion(archivo.toString());
+			        //   CaratulaCancion(archivo.toString());
 			           try {
 			               Audio.open(new File(ReproduceCancion));
 			               Audio.play();
 			               Audio.setGain(volumen);
 			               Audio.setPan(balance);
-			               int pista = jListListaCanciones.getAnchorSelectionIndex()+1;
-			               new JLaTexto(fuente1, "Pista: "+ pista, jLabelPista, Color.WHITE, 15);
+			               int pista = listaCanciones.getAnchorSelectionIndex()+1;
+			              
 			           } catch (BasicPlayerException ex) {
 			               System.out.println(ex);
 			               System.out.println("El contenido de caratula mp3 es demasiado grande....Borrela!!!");

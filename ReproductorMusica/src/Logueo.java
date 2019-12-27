@@ -128,7 +128,7 @@ public class Logueo extends JFrame {
 				*/
 			}
 		});
-		btnLogin.setBounds(168, 180, 97, 25);
+		btnLogin.setBounds(168, 178, 97, 38);
 		btnLoguear.add(btnLogin);
 		JButton btnNewButton = new JButton("¿No tienes cuenta? Entra aqui");
 		btnNewButton.setBounds(98, 228, 245, 29);
