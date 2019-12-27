@@ -64,19 +64,20 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblLogo_1 = new JLabel("Logo");
 	
 
-	private JPanel panel_1 = new JPanel((new GridLayout(2,1)));
+	private JPanel panel_1 = new JPanel();
 	private JPanel p1Arriba = new JPanel();
 	private JPanel p1Abajo = new JPanel();
 	/**
 	 * @wbp.nonvisual location=340,391
 	 */
-	private JPanel panel_2 = new JPanel((new GridLayout(2,1)));
+	private JPanel panel_2 = new JPanel();
 	private JPanel p2Arriba = new JPanel();
 	private JPanel p2Abajo = new JPanel();
+	
 	/**
 	 * @wbp.nonvisual location=480,371
 	 */
-	private JPanel panel_3 = new JPanel((new GridLayout(2,1)));
+	private JPanel panel_3 = new JPanel();
 	private JPanel p3Arriba = new JPanel();
 	private JPanel p3Abajo = new JPanel();
 	
@@ -91,7 +92,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * @wbp.nonvisual location=340,391
 	 */
-	private JPanel panel_4 = new JPanel((new GridLayout(2,1)));
+	private JPanel panel_4 = new JPanel();
 	private JPanel p4Arriba = new JPanel();
 	private JLabel lblCaratula = new JLabel("Caratula");
 	private JButton btnAtras = new JButton("Atras");
@@ -170,19 +171,33 @@ public VentanaPrincipal() {
 		menuBar.add(mnReproduccion);
 		
 		menuBar.add(mnVentana);
-		getContentPane().setLayout(new BorderLayout());
+		getContentPane().setLayout(null);
+		panel_1.setBounds(0, 0, 53, 373);
+		panel_1.setLayout(null);
+		p1Arriba.setBounds(5, 5, 43, 181);
 		
 		panel_1.add(p1Arriba);
+		p1Abajo.setBounds(5, 186, 43, 181);
 		panel_1.add(p1Abajo);
+		p1Abajo.setLayout(null);
+		p1Arriba.setLayout(null);
+		lblUnidad.setBounds(5, 5, 33, 14);
 		
 		
 		p1Arriba.add(lblUnidad);
 		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(panel_1, BorderLayout.WEST);
+		getContentPane().add(panel_1);
+		panel_2.setBounds(53, 0, 577, 373);
+		panel_2.setLayout(null);
+		p2Arriba.setBounds(0, 0, 577, 186);
 		
 		
 		panel_2.add(p2Arriba);
+		p2Abajo.setBounds(0, 186, 577, 186);
 		panel_2.add(p2Abajo);
+		p2Abajo.setLayout(null);
+		p2Arriba.setLayout(null);
+		lblPlaylist.setBounds(269, 5, 33, 14);
 		
 		
 		
@@ -190,33 +205,53 @@ public VentanaPrincipal() {
 		
 		
 		p2Arriba.add(lblPlaylist);
+		listaCanciones.setBounds(307, 12, 0, 0);
 		//panel_2.setBorder(new EmptyBorder(5, 5, 5, 200));
 		p2Arriba.add(listaCanciones);
-		getContentPane().add(panel_2, BorderLayout.CENTER);
+		getContentPane().add(panel_2);
+		panel_3.setBounds(630, 0, 54, 373);
+		panel_3.setLayout(null);
+		p3Arriba.setBounds(5, 5, 44, 181);
 		
 		
 		
 		panel_3.add(p3Arriba);
+		p3Abajo.setBounds(5, 186, 44, 181);
 		panel_3.add(p3Abajo);
+		p3Abajo.setLayout(null);
+		p3Arriba.setLayout(null);
+		lblAmigos.setBounds(5, 5, 34, 14);
 		
 		p3Arriba.add(lblAmigos);
 		panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(panel_3, BorderLayout.EAST);
+		getContentPane().add(panel_3);
+		panel_4.setBounds(0, 373, 684, 66);
+		panel_4.setLayout(null);
+		p4Arriba.setBounds(0, 0, 684, 33);
 		
 		panel_4.add(p4Arriba);
+		p4Arriba.setLayout(null);
+		lblCaratula.setBounds(203, 9, 41, 14);
 		
 		p4Arriba.add(lblCaratula);
+		btnAtras.setBounds(249, 5, 59, 23);
 		
 		p4Arriba.add(btnAtras);
+		btnPlaypausa.setBounds(313, 5, 85, 23);
 	//	btnPlaypausa.setIcon(new ImageIcon("/Users/ikerrodriguez/Downloads/Unknown"));
 		p4Arriba.add(btnPlaypausa);
+		btnSiguiente.setBounds(403, 5, 77, 23);
 		
 		p4Arriba.add(btnSiguiente);
+		p4Abajo.setBounds(0, 33, 684, 33);
 		panel_4.add(p4Abajo);
+		p4Abajo.setLayout(null);
+		lblCancion.setBounds(247, 5, 38, 14);
 		lblCancion.setHorizontalAlignment(SwingConstants.CENTER);
 		p4Abajo.add(lblCancion);
+		pb.setBounds(290, 5, 146, 14);
 		p4Abajo.add(pb);
-		getContentPane().add(panel_4, BorderLayout.SOUTH);
+		getContentPane().add(panel_4);
 		
 		
 		btnPlaypausa.addActionListener(new ActionListener() {
