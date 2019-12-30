@@ -6,5 +6,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="Libreria/basicplayer3.jar"/>
+	<classpathentry kind="lib" path="Libreria/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="Libreria/jaudiotagger-2.0.4.jar"/>
+	<classpathentry kind="lib" path="Libreria/jl1.0.jar"/>
+	<classpathentry kind="lib" path="Libreria/mp3agic2-0.8.1.jar"/>
+	<classpathentry kind="lib" path="Libreria/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="Libreria/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="Libreria/tritonus_share.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
