@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -54,17 +55,18 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
+import javax.swing.JScrollPane;
 
 public class VentanaPrincipal extends JFrame {
  //prueba
 	
-	basic_playerlistener();
 	
+		
 	private JPanel contentPane;
 	private JFrame frame;
 	private JButton btnPlaypausa = new JButton("Play/Pausa");
 	private JMenuBar menuBar = new JMenuBar();
-	private JLabel lblLogo_1 = new JLabel("Logo");
+	private JLabel lblLogo_1 = new JLabel("Viri");
 	
 
 	private JPanel panel_1 = new JPanel();
@@ -110,11 +112,15 @@ public class VentanaPrincipal extends JFrame {
 	private JMenu mnReproduccion = new JMenu("Reproduccion");
 	private JMenu mnVentana = new JMenu("Ventana");
 	private JMenu mnAcercaDeProg = new JMenu("Acerca de prog");
-	private final JList listaCanciones = new JList();
+	private JList listaCanciones = new JList();
 	
 	private final BasicPlayer Audio = new BasicPlayer();
 	private File archivo= null;
+	private String agregaCanciones[]= new String[10];
 	private final ArrayList<String> datos = new ArrayList<>();
+	
+	 private Tag tag; 
+	 private  AudioFile audiofile = new AudioFile();
 	
 	
 	 private final String fuente1="Georgia";
@@ -199,8 +205,6 @@ public VentanaPrincipal() {
 		p2Abajo.setBounds(0, 181, 577, 186);
 		panel_2.add(p2Abajo);
 		p2Abajo.setLayout(null);
-		listaCanciones.setBounds(0, 177, 573, -302);
-		p2Abajo.add(listaCanciones);
 		p2Arriba.setLayout(null);
 		lblPlaylist.setBounds(48, 6, 264, 22);
 		
@@ -210,6 +214,13 @@ public VentanaPrincipal() {
 		
 		
 		p2Arriba.add(lblPlaylist);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 40, 565, 140);
+		p2Arriba.add(scrollPane);
+		
+		
+		scrollPane.setViewportView(listaCanciones);
 		getContentPane().add(panel_2);
 		panel_3.setBounds(630, 0, 54, 373);
 		panel_3.setLayout(null);
@@ -299,7 +310,8 @@ public VentanaPrincipal() {
 			        }
 			}
 		});
-		
+}
+
 		
 		public void basic_playerlistener() {
 			Audio.addBasicPlayerListener(new BasicPlayerListener() {
@@ -309,14 +321,14 @@ public VentanaPrincipal() {
 					// TODO Auto-generated method stub
 					if (!bloquear){
 	                    if (Audio.getStatus()==2 & repitaCancion){
-	                        jButtonReproducir.doClick();
+	                    	btnPlaypausa.doClick();
 	                    }
-	                    if (jListListaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
+	                    if (listaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
 	                        if (Audio.getStatus()==2 & siguiente){
-	                            int pista = jListListaCanciones.getAnchorSelectionIndex();                            
-	                            jListListaCanciones.setSelectedIndex(pista+1);
+	                            int pista = listaCanciones.getAnchorSelectionIndex();                            
+	                            listaCanciones.setSelectedIndex(pista+1);
 	                            repaint();
-	                            jButtonReproducir.doClick();
+	                            btnPlaypausa.doClick();
 	                        }
 	                    }
 	                }                
@@ -332,39 +344,146 @@ public VentanaPrincipal() {
 				@Override
 				public void progress(int i, long l, byte[] bytes, Map propiedades) {
 					// TODO Auto-generated method stub
-					 CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
+					// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
 
 		                Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
 		                bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
-		                jSliderProgresoMp3.setValue((int)bytesTranscurrido);
+		                pb.setValue((int)bytesTranscurrido);
 				}
 				
 				@Override
 				public void opened(Object o, Map map) {
 					// TODO Auto-generated method stub
-					 CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+				//	 CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
 		               
-		               new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
-		               new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
+		            //   new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
+		              // new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
 
-		               jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-		               jSliderProgresoMp3.setMinimum(0);
+		               pb.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+		               pb.setMinimum(0);
+				}
+			});
+	
+			btnSiguiente.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					 if (listaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
+				            bloquear=true;
+				            Comprovacion(1);
+				            bloquear=false;
+				        }
+
 				}
 			});
 			
+			btnAtras.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					if (listaCanciones.getSelectedIndex()!=0){
+			            bloquear=true;
+			            Comprovacion(-1);
+			            bloquear=false;
+			        }
+				}
+			});
+			
+			
+				
+				listaCanciones.addMouseListener(new MouseListener() {
+				
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+						 System.out.println(listaCanciones.getAnchorSelectionIndex());
+			                
+			                int indice = listaCanciones.getSelectedIndex();
+			                
+			                 if (indice!=-1){
+			                    String ReproduceCancion = datos.get(indice);
+			       
+			                    File file = new File(ReproduceCancion);
+			                    try {
+			                    audiofile = AudioFileIO.read(file);                   
+			                    tag=audiofile.getTag();
+			                    
+			                    } catch (CannotReadException | IOException | TagException | NullPointerException |
+			                        ReadOnlyFileException | InvalidAudioFrameException ex) {
+			                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex); }
+			                    
+			                    //Hace la llamada al metodo encargado de rellenar los JLbels....
+			               //     JLaEtiquetas(file);
+			        //            lblCaratula(file.toString());
+			                    if (e.getClickCount()==2){
+			                        try {
+			                            bloquear=true;
+			                            Audio.stop();
+			                            bloquear=false;
+			                        } catch (BasicPlayerException ex) {
+			                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);}
+			                        btnPlaypausa.doClick();
+			                        if (Audio.getStatus()==2){
+			                            btnPlaypausa.doClick();
+			                        }
+			                    }
+			                 }
+
+					}
+				});
+		
+			
+			
+			
+			
+			
+			
 		}
 		
-		
-		 
-		
-		
-		
-		
-		
-		
+		public void Comprovacion(int opera){
+	        int indice = listaCanciones.getSelectedIndex();        
+	        if (archivo!=null & indice!=-1 & Audio.getStatus()==0){
+	            //El metodo getAnchotSelectionIndex obtenemos el numero de posicion en el que se encuentra el JList...
+	            int pista = listaCanciones.getAnchorSelectionIndex();
+	            listaCanciones.setSelectedIndex(pista+opera);
+	            try {
+	                Audio.stop();
+	            } catch (BasicPlayerException ex) {
+	                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+	            }
+	            btnPlaypausa.doClick();
+	        }
+	    }
 		}
 
-		}
+		
 
 	
 		
