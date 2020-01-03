@@ -56,7 +56,7 @@ public class NuevoUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NuevoUsuario() extends {
+	public NuevoUsuario() {
 		
 		/*	JFrame l = this;
 		Logueo = lo;*/
@@ -130,14 +130,22 @@ public class NuevoUsuario extends JFrame {
 				
 				String pass =new String(txtpassword.getContrasenya_usuario());
 				String passCon = new String(( txtpassword2).getContrasenya_usuario());
+				
 				if(pass.equals(passCon)) {
 					String nuevoPass = hash.sha1(pass);
 					
-					mod.setNombre_usuario.getText());
+					mod.setNombre_usuario.getText();
 					mod.setContrasenya_usuario(nuevoPass);
-					mod.setCorreo_usuario.getText());
-				}
-				else {
+					mod.setCorreo_usuario.getText();
+					mod.setTipo_usuario(1);
+				
+					if(modSql.registrar(mod)) {
+						JOptionPane.showMessageDialog(null, "Nuevo Usuario creado");
+					}else {
+						JOptionPane.showMessageDialog(null, "Error al guardar los datos");
+					}
+					
+				} else {
 					JOptionPane.showMessageDialog(null, "Las contrasenyas no coinciden");
 				}
 				
