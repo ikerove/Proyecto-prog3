@@ -23,6 +23,9 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+
+import Musica.Cancion;
+
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -30,7 +33,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -50,12 +57,14 @@ import javazoom.jlgui.basicplayer.BasicPlayerListener;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.CannotWriteException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 
 public class VentanaPrincipal extends JFrame {
  //prueba
@@ -67,6 +76,10 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnPlaypausa = new JButton("Play/Pausa");
 	private JMenuBar menuBar = new JMenuBar();
 	private JLabel lblLogo_1 = new JLabel("Viri");
+	
+	private JButton btnDirectorio = new JButton("Directorio");
+
+	
 	
 
 	private JPanel panel_1 = new JPanel();
@@ -105,6 +118,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel p4Abajo = new JPanel();
 	
 	private JProgressBar pb = new JProgressBar();
+	private JSlider slider = new JSlider();
 	private JMenu mnNombre = new JMenu("Nombre");
 	private JMenu mnArchivo = new JMenu("Archivo");
 	private JMenu mnEdicion = new JMenu("Edicion");
@@ -115,12 +129,17 @@ public class VentanaPrincipal extends JFrame {
 	private JList listaCanciones = new JList();
 	
 	private final BasicPlayer Audio = new BasicPlayer();
+	FileNameExtensionFilter filtrado = new FileNameExtensionFilter("Solo Mp3","mp3","jpg");
+	
 	private File archivo= null;
 	private String agregaCanciones[]= new String[10];
 	private final ArrayList<String> datos = new ArrayList<>();
 	
 	 private Tag tag; 
 	 private  AudioFile audiofile = new AudioFile();
+	 
+	 private String ruta = "/Users/ikerrodriguez";
+	 private final JFileChooser abrirFile  = new JFileChooser(new File(ruta));
 	
 	
 	 private final String fuente1="Georgia";
@@ -132,6 +151,9 @@ public class VentanaPrincipal extends JFrame {
 	    private float balance=0.5f;
 	    private float volumenM;
 	    private float volumen=0.8f;
+	   
+	    private final JButton btnRuta = new JButton("Ruta");
+	    private final JButton btnAgregar = new JButton("Agregar Canciones");
 
 
 	/**
@@ -160,7 +182,7 @@ public VentanaPrincipal() {
 		
 		setBounds(100, 100, 573, 329);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(700, 501);
+		setSize(795, 501);
 		setLocationRelativeTo (null);
 		
 		setJMenuBar(menuBar);
@@ -222,20 +244,33 @@ public VentanaPrincipal() {
 		
 		scrollPane.setViewportView(listaCanciones);
 		getContentPane().add(panel_2);
-		panel_3.setBounds(630, 0, 54, 373);
+		panel_3.setBounds(630, 0, 159, 373);
 		panel_3.setLayout(null);
-		p3Arriba.setBounds(5, 6, 64, 180);
+		p3Arriba.setBounds(5, 6, 154, 180);
 		
 		
 		
 		panel_3.add(p3Arriba);
-		p3Abajo.setBounds(5, 186, 44, 181);
+		p3Abajo.setBounds(5, 186, 64, 181);
 		panel_3.add(p3Abajo);
 		p3Abajo.setLayout(null);
 		p3Arriba.setLayout(null);
 		lblAmigos.setBounds(5, 5, 53, 14);
 		
 		p3Arriba.add(lblAmigos);
+		
+		
+		btnDirectorio.setBounds(5, 44, 149, 29);
+		p3Arriba.add(btnDirectorio);
+		btnRuta.setBounds(15, 85, 117, 29);
+		
+		p3Arriba.add(btnRuta);
+		btnAgregar.setBounds(5, 126, 149, 29);
+		
+		p3Arriba.add(btnAgregar);
+		
+		
+		
 		panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel_3);
 		panel_4.setBounds(0, 373, 684, 66);
@@ -262,8 +297,8 @@ public VentanaPrincipal() {
 		lblCancion.setBounds(6, 17, 269, 14);
 		lblCancion.setHorizontalAlignment(SwingConstants.CENTER);
 		p4Abajo.add(lblCancion);
-		pb.setBounds(287, 17, 232, 14);
-		p4Abajo.add(pb);
+		slider.setBounds(280, 17, 232, 14);
+		p4Abajo.add(slider);
 		getContentPane().add(panel_4);
 		
 		
@@ -273,13 +308,14 @@ public VentanaPrincipal() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int indice = listaCanciones.getSelectedIndex();
+				
 				if (archivo!=null & Audio.getStatus()!=0 & indice!=-1){
 			           //System.out.println(Audio.getSleepTime());
 			           String ReproduceCancion = datos.get(indice);
 			           //System.out.println(ReproduceCancion);
 			           archivo = new File(ReproduceCancion);
 			         
-			           pb.setEnabled(true);
+			           slider.setEnabled(true);
 				
 			        //   CaratulaCancion(archivo.toString());
 			           try {
@@ -292,77 +328,53 @@ public VentanaPrincipal() {
 			           } catch (BasicPlayerException ex) {
 			               System.out.println(ex);
 			               System.out.println("El contenido de caratula mp3 es demasiado grande....Borrela!!!");
+			               
+			               
+			               try {
+			                   
+			                   Audio.stop();
+			                   
+			                   String RutaCancion = datos.get(indice);
+			                   AudioFile file = AudioFileIO.read(new File(RutaCancion));
+			                   Tag tager = file.getTag();
+			                   tager.deleteField(FieldKey.COVER_ART);
+			                   tager.deleteArtworkField();
+			                   AudioFileIO.write(file);
+			                   InputStream inputStream = new FileInputStream(ruta);
+			                   OutputStream outputStream =  new FileOutputStream("Audio.mp3");
+			                   
+			                   byte[] buf = new byte[1024];
+			                   int len;
+
+			                   while ((len = inputStream.read(buf)) > 0) {
+			                     outputStream.write(buf, 0, len);
+			                    }
+			                   inputStream.close();
+			                   outputStream.close();
+			                   
+			              
+			                    System.out.println();
+			                    System.out.println("El contenido de caratula mp3 es de masiado grande....Borrela!!!"); 
+			                   
+			                } 
+			               catch (IOException ex1) {System.out.println(ex1);} 
+			               catch (TagException ex1) {System.out.println(ex1);} 
+			               catch (ReadOnlyFileException ex1) {System.out.println(ex1);} 
+			               catch (InvalidAudioFrameException ex1) {System.out.println(ex1);} 
+			               catch (CannotWriteException ex1) {System.out.println(ex1);} 
+			               catch (CannotReadException ex1) {System.out.println(ex1);} 
+			               catch (BasicPlayerException ex1) {System.out.println(ex1);} 
+			               
 			           }  
 			}
 				
-				 if (Audio.getStatus()==1){
-			            try {
-			                Audio.resume();
-			            } catch (BasicPlayerException ex) {
-			                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-			            }       
-			        }else  if (Audio.getStatus()==0){
-			            try {
-			                Audio.pause();
-			            } catch (BasicPlayerException ex) {
-			                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-			            }
-			        }
+				 
 			}
 		});
-}
+
 
 		
-		public void basic_playerlistener() {
-			Audio.addBasicPlayerListener(new BasicPlayerListener() {
-				
-				@Override
-				public void stateUpdated(BasicPlayerEvent bpe) {
-					// TODO Auto-generated method stub
-					if (!bloquear){
-	                    if (Audio.getStatus()==2 & repitaCancion){
-	                    	btnPlaypausa.doClick();
-	                    }
-	                    if (listaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
-	                        if (Audio.getStatus()==2 & siguiente){
-	                            int pista = listaCanciones.getAnchorSelectionIndex();                            
-	                            listaCanciones.setSelectedIndex(pista+1);
-	                            repaint();
-	                            btnPlaypausa.doClick();
-	                        }
-	                    }
-	                }                
-	            
-				}
-				
-				@Override
-				public void setController(BasicController arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void progress(int i, long l, byte[] bytes, Map propiedades) {
-					// TODO Auto-generated method stub
-					// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
-
-		                Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
-		                bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
-		                pb.setValue((int)bytesTranscurrido);
-				}
-				
-				@Override
-				public void opened(Object o, Map map) {
-					// TODO Auto-generated method stub
-				//	 CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
-		               
-		            //   new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
-		              // new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
-
-		               pb.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-		               pb.setMinimum(0);
-				}
-			});
+		
 	
 			btnSiguiente.addActionListener(new ActionListener() {
 				
@@ -393,7 +405,7 @@ public VentanaPrincipal() {
 			
 			
 				
-				listaCanciones.addMouseListener(new MouseListener() {
+			listaCanciones.addMouseListener(new MouseListener() {
 				
 					@Override
 					public void mouseReleased(MouseEvent e) {
@@ -459,13 +471,155 @@ public VentanaPrincipal() {
 					}
 				});
 		
+			btnDirectorio.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+					abrirFile.setDialogTitle("Ruta Absoluta Busqueda...");
+			        abrirFile.setFileFilter(filtrado);
+			        abrirFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			        
+			        
+			        if (abrirFile.showOpenDialog(p3Arriba)==0){
+			            File file = new File(""+abrirFile.getSelectedFile());        
+			            
+			            String argumento = file.getName();//Obtenemos el nombre del archivo...
+			            argumento=argumento.substring(argumento.length()-3,argumento.length());//Obtenemos los tres ultimos caracteres de la cadena de nombre...
+			            
+			            //Evaluamos la condicion de que el archivo al que hacemos referencia exista....
+			            //Evaluamos la condicion de que el archivo que hacemos referencia sea de extension mp3...
+			            if (file.exists()& argumento.equals("mp3")){
+			                
+			                archivo = abrirFile.getSelectedFile();//Obtenemos la ruta del archivo..
+			                                 
+			                try {
+			                    audiofile = AudioFileIO.read(archivo);
+			                    tag =  audiofile.getTag();
+			     
+			                } catch (CannotReadException | IOException | TagException | 
+			                        ReadOnlyFileException | InvalidAudioFrameException ex) {
+			                    System.out.println("Error no hay archivo el argumento es "+archivo);
+			                }                     
+			                ruta = abrirFile.getCurrentDirectory().toString();
+			              //  new JLaTexto(fuente1, "Ruta: "+ ruta,jLabelRuta , Color.WHITE, 15);
+			              
+			                datos.add(archivo.toString());
+			                
+			                agregaCanciones = new String[datos.size()];
+			              
+			                int x=0;
+			                for (String cancion:datos){
+			                    File introduce = new File(cancion);
+			                    agregaCanciones[x] = introduce.getName();
+			                    x++;
+			                }
+			                listaCanciones.setListData(agregaCanciones);
+			              //  JLaEtiquetas(archivo);
+			            }   
+			            
+			        }   
+
+				}
+			});
 			
 			
+			btnRuta.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					abrirFile.setDialogTitle("Directorio Agregar Canciones");
+			        abrirFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//Accederemos solamente a directorios.
+			        if (abrirFile.showOpenDialog(p3Arriba)==0){
+			            ruta = abrirFile.getSelectedFile().toString();
+			           // new JLaTexto(fuente1, "Ruta: "+ ruta,jLabelRuta , Color.WHITE, 15); 
+				}
+				}
+				});
+			
+			
+			btnAgregar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+					 
+			        if (ruta!=null & Audio.getStatus()!=1){
+			            archivo = new File(ruta);
+			            
+			           Cancion agre = new Cancion(agregaCanciones, archivo, datos, listaCanciones);         
+			         //  new JLaTexto(fuente1, "Total: "+datos.size(), jLabelTotal, Color.WHITE, 15);
+			           agregaCanciones= agre.agregaGet();
+			           if (archivo!=null){
+			        	   listaCanciones.setSelectedIndex(0);
+			              archivo = new File(datos.get(0));
+			                  
+			           }                    
+			        }  
+				}
+			});
 			
 			
 			
 			
 		}
+
+
+	public void basic_playerlistener() {
+		Audio.addBasicPlayerListener(new BasicPlayerListener() {
+		
+		@Override
+		public void stateUpdated(BasicPlayerEvent bpe) {
+			// TODO Auto-generated method stub
+			if (!bloquear){
+                if (Audio.getStatus()==2 & repitaCancion){
+                	btnPlaypausa.doClick();
+                }
+                if (listaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
+                    if (Audio.getStatus()==2 & siguiente){
+                        int pista = listaCanciones.getAnchorSelectionIndex();                            
+                        listaCanciones.setSelectedIndex(pista+1);
+                        repaint();
+                        btnPlaypausa.doClick();
+                    }
+                }
+            }                
+        
+		}
+		
+		@Override
+		public void setController(BasicController arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void progress(int i, long l, byte[] bytes, Map propiedades) {
+			// TODO Auto-generated method stub
+			// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
+
+                Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
+                bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
+                pb.setValue((int)bytesTranscurrido);
+		}
+		
+		@Override
+		public void opened(Object o, Map map) {
+			// TODO Auto-generated method stub
+		//	 CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+               
+            //   new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
+              // new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
+
+               pb.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+               pb.setMinimum(0);
+		}
+		
+			});
+	}
 		
 		public void Comprovacion(int opera){
 	        int indice = listaCanciones.getSelectedIndex();        
@@ -481,87 +635,14 @@ public VentanaPrincipal() {
 	            btnPlaypausa.doClick();
 	        }
 	    }
-		}
+		
+		
+		
+	
+}
 
 		
 
 	
-		
-		//btnPlaypausa.setBounds(168,183,97,22);
-		
-	
 
-
-
-
-/*
-public VentanaPrincipal() {
-	
-	frame = new JFrame();
-	frame.setBounds(100, 100, 573, 329);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setSize(700, 500);
-	setLocationRelativeTo (null);
-	
-	frame.setJMenuBar(menuBar);
-	
-	menuBar.add(lblLogo_1);
-	
-	menuBar.add(mnNombre);
-	
-	mnNombre.add(mnAcercaDeProg);
-	
-	menuBar.add(mnArchivo);
-	
-	menuBar.add(mnEdicion);
-	
-	menuBar.add(mnVisualizacion);
-	
-	menuBar.add(mnReproduccion);
-	
-	menuBar.add(mnVentana);
-	frame.getContentPane().setLayout(new BorderLayout());
-	
-	panel_1.add(p1Arriba);
-	panel_1.add(p1Abajo);
-	
-	
-	p1Arriba.add(lblUnidad);
-	panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-	frame.getContentPane().add(panel_1, BorderLayout.WEST);
-	
-	
-	panel_2.add(p2Arriba);
-	panel_2.add(p2Abajo);
-	
-	
-	
-	
-	p2Arriba.add(lblPlaylist);
-	//panel_2.setBorder(new EmptyBorder(5, 5, 5, 200));
-	frame.getContentPane().add(panel_2, BorderLayout.CENTER);
-	
-	
-	panel_3.add(p3Arriba);
-	panel_3.add(p3Abajo);
-	
-	p3Arriba.add(lblAmigos);
-	panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
-	frame.getContentPane().add(panel_3, BorderLayout.EAST);
-	
-	panel_4.add(p4Arriba);
-	
-	p4Arriba.add(lblCaratula);
-	
-	p4Arriba.add(btnAtras);
-	p4Arriba.add(btnPlaypausa);
-	
-	p4Arriba.add(btnSiguiente);
-	panel_4.add(p4Abajo);
-	lblCancion.setHorizontalAlignment(SwingConstants.CENTER);
-	p4Abajo.add(lblCancion);
-	p4Abajo.add(pb);
-	frame.getContentPane().add(panel_4, BorderLayout.SOUTH);
-	
-}*/
 
