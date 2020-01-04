@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 public class ConexionMySQL {
 
 	
-	
-	 public String db = "bdcontactos";
-	    public String url = "jdbc:mysql://localhost/"+db;
+		private final String base = "usuarios";
+	 	public String db = "bdcontactos";
+	    public String url = "jdbc:mysql://localhost:3306/"+db;
 	    public String user = "root";
 	    public String pass = "123";
 

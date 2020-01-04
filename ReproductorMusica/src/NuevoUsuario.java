@@ -124,9 +124,9 @@ public class NuevoUsuario extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//GestionUsuario gestionUsuario = new GestionUsuario();
-				SQLUsuarios modSql = new SqlUsuarios();
-				usuarios mod = new usuarios();
+				
+				GestionUsuario modSql = new GestionUsuario();
+				Usuarios mod = new Usuarios();
 				
 				String pass =new String(txtpassword.getContrasenya_usuario());
 				String passCon = new String(( txtpassword2).getContrasenya_usuario());
@@ -141,6 +141,7 @@ public class NuevoUsuario extends JFrame {
 				
 					if(modSql.registrar(mod)) {
 						JOptionPane.showMessageDialog(null, "Nuevo Usuario creado");
+						limpiar();
 					}else {
 						JOptionPane.showMessageDialog(null, "Error al guardar los datos");
 					}
@@ -155,6 +156,12 @@ public class NuevoUsuario extends JFrame {
 				Logueo.setVisible(true);*/
 
 			} 
+			private void limpiar() {
+				txt1.setText("");
+				txt5.setText("");
+				txtpassword.setText("");
+				txtpassword2.setText("");
+			}
 		});
 		
 		
