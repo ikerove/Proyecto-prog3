@@ -8,7 +8,7 @@ package mantenimientos;
     private int tipo_usuario;
     private String contrasenya_usuario;
     private String correo_usuario;
-    
+	
     public Usuario (){
     	super();
     }
@@ -19,8 +19,7 @@ package mantenimientos;
     	this.tipo_usuario = tipo_usuario;
     	this.contrasenya_usuario = contrasenya_usuario;
     	this.correo_usuario = correo_usuario;
-    	
-    }
+    }	
     public int getIdUsuario() {
     	return idUsuario;
     }

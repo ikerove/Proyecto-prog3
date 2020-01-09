@@ -10,7 +10,7 @@ import mantenimientos.Usuario;
 
 public class GestionUsuario {
 	
-	public Usuario registrarUsuario(Usuario usu) {
+	public boolean	 registrarUsuario(Usuario usu) {
 		
 		Usuario usuario=null;
 		
@@ -30,13 +30,14 @@ public class GestionUsuario {
 				pst.setString(3, usu.getContrasenya_usuario());
 				pst.setString(4, usu.getCorreo_usuario());
 				pst.execute();
-				return usuario;
+				return true;
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
-			return usuario;
+			
 			
 			
 			
@@ -64,7 +65,7 @@ public class GestionUsuario {
 		rs = pst.executeQuery();
 		
 		while(rs.next()) {
-			usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+			usuario = new Usuario();
 			
 		}
 		
