@@ -24,6 +24,7 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+import Interfaces.Ecualizador_Graphics;
 import Musica.Cancion;
 
 import java.awt.Color;
@@ -66,14 +67,20 @@ import org.jaudiotagger.tag.TagException;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame  {
  //prueba
 	
-	
+	 private Ecualizador_Graphics E_G;
+	 int E0,E1,E2,E3,E4,E5,E6,E7,E8,E9;
+
+	 private JLabel lblTranscurrido = new JLabel("Transcurrido");
+	 private JLabel lblDuracion = new JLabel("Duracion");
+
 		
 	private JPanel contentPane;
 	private JFrame frame;
-	private JButton btnPlaypausa = new JButton("Play/Pausa");
+	private JButton btnPlay = new JButton("Play");
+	private JButton btnPausa = new JButton("Pausa");
 	private JMenuBar menuBar = new JMenuBar();
 	private JLabel lblLogo_1 = new JLabel("Viri");
 	
@@ -104,10 +111,6 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblPlaylist = new JLabel("Playlist");
 	private JLabel lblAmigos = new JLabel("Amigos");
 	/**
-	 * @wbp.nonvisual location=40,391
-	 */
-	private JLabel lblCancion = new JLabel("Cancion");
-	/**
 	 * @wbp.nonvisual location=340,391
 	 */
 	private JPanel panel_4 = new JPanel();
@@ -117,7 +120,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnSiguiente = new JButton("Siguiente");
 	private JPanel p4Abajo = new JPanel();
 	
-	private JProgressBar pb = new JProgressBar();
+	//private JProgressBar pb = new JProgressBar();
 	private JSlider slider = new JSlider();
 	private JMenu mnNombre = new JMenu("Nombre");
 	private JMenu mnArchivo = new JMenu("Archivo");
@@ -179,10 +182,12 @@ public class VentanaPrincipal extends JFrame {
 	
 	
 public VentanaPrincipal() {
+	
+		
 		
 		setBounds(100, 100, 573, 329);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(795, 501);
+		setSize(850, 501);
 		setLocationRelativeTo (null);
 		
 		setJMenuBar(menuBar);
@@ -203,9 +208,9 @@ public VentanaPrincipal() {
 		
 		menuBar.add(mnVentana);
 		getContentPane().setLayout(null);
-		panel_1.setBounds(0, 0, 53, 373);
+		panel_1.setBounds(0, 0, 108, 373);
 		panel_1.setLayout(null);
-		p1Arriba.setBounds(5, 5, 65, 181);
+		p1Arriba.setBounds(5, 5, 103, 181);
 		
 		panel_1.add(p1Arriba);
 		p1Abajo.setBounds(5, 186, 65, 181);
@@ -218,7 +223,7 @@ public VentanaPrincipal() {
 		p1Arriba.add(lblUnidad);
 		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel_1);
-		panel_2.setBounds(53, 0, 577, 373);
+		panel_2.setBounds(110, 0, 591, 373);
 		panel_2.setLayout(null);
 		p2Arriba.setBounds(0, 0, 577, 186);
 		
@@ -227,6 +232,8 @@ public VentanaPrincipal() {
 		p2Abajo.setBounds(0, 181, 577, 186);
 		panel_2.add(p2Abajo);
 		p2Abajo.setLayout(null);
+		lblCaratula.setBounds(6, 6, 178, 157);
+		p2Abajo.add(lblCaratula);
 		p2Arriba.setLayout(null);
 		lblPlaylist.setBounds(48, 6, 264, 22);
 		
@@ -244,14 +251,14 @@ public VentanaPrincipal() {
 		
 		scrollPane.setViewportView(listaCanciones);
 		getContentPane().add(panel_2);
-		panel_3.setBounds(630, 0, 159, 373);
+		panel_3.setBounds(642, 0, 202, 373);
 		panel_3.setLayout(null);
-		p3Arriba.setBounds(5, 6, 154, 180);
+		p3Arriba.setBounds(61, 6, 154, 180);
 		
 		
 		
 		panel_3.add(p3Arriba);
-		p3Abajo.setBounds(5, 186, 64, 181);
+		p3Abajo.setBounds(61, 186, 64, 181);
 		panel_3.add(p3Abajo);
 		p3Abajo.setLayout(null);
 		p3Arriba.setLayout(null);
@@ -273,36 +280,45 @@ public VentanaPrincipal() {
 		
 		panel_3.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel_3);
-		panel_4.setBounds(0, 373, 684, 66);
+		panel_4.setBounds(0, 373, 844, 78);
 		panel_4.setLayout(null);
 		p4Arriba.setBounds(0, 0, 684, 33);
 		
 		panel_4.add(p4Arriba);
 		p4Arriba.setLayout(null);
-		lblCaratula.setBounds(113, 9, 92, 14);
-		
-		p4Arriba.add(lblCaratula);
-		btnAtras.setBounds(205, 6, 59, 23);
+		btnAtras.setBounds(167, 5, 59, 23);
 		
 		p4Arriba.add(btnAtras);
-		btnPlaypausa.setBounds(291, 5, 107, 23);
+		btnPlay.setBounds(226, 5, 107, 23);
 	//	btnPlaypausa.setIcon(new ImageIcon("/Users/ikerrodriguez/Downloads/Unknown"));
-		p4Arriba.add(btnPlaypausa);
-		btnSiguiente.setBounds(403, 5, 120, 23);
+		p4Arriba.add(btnPlay);
+		btnSiguiente.setBounds(450, 5, 120, 23);
 		
 		p4Arriba.add(btnSiguiente);
+		
+		
+		btnPausa.setBounds(332, 2, 117, 29);
+		p4Arriba.add(btnPausa);
 		p4Abajo.setBounds(0, 33, 684, 51);
 		panel_4.add(p4Abajo);
 		p4Abajo.setLayout(null);
-		lblCancion.setBounds(6, 17, 269, 14);
-		lblCancion.setHorizontalAlignment(SwingConstants.CENTER);
-		p4Abajo.add(lblCancion);
-		slider.setBounds(280, 17, 232, 14);
+		slider.setBounds(139, 6, 353, 14);
 		p4Abajo.add(slider);
+		
+		slider.setEnabled(false);
+		slider.setValue(0);
+		slider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		
+		lblTranscurrido.setBounds(50, 6, 61, 16);
+		p4Abajo.add(lblTranscurrido);
+		
+		
+		lblDuracion.setBounds(498, 6, 61, 16);
+		p4Abajo.add(lblDuracion);
 		getContentPane().add(panel_4);
 		
 		
-		btnPlaypausa.addActionListener(new ActionListener() {
+		btnPlay.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -317,7 +333,7 @@ public VentanaPrincipal() {
 			         
 			           slider.setEnabled(true);
 				
-			        //   CaratulaCancion(archivo.toString());
+			           CaratulaCancion(archivo.toString());
 			           try {
 			               Audio.open(new File(ReproduceCancion));
 			               Audio.play();
@@ -372,7 +388,28 @@ public VentanaPrincipal() {
 			}
 		});
 
+			btnPausa.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					if (Audio.getStatus()==1){
+			            try {
+			                Audio.resume();
+			            } catch (BasicPlayerException ex) {
+			                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+			            }       
+			        }else  if (Audio.getStatus()==0){
+			            try {
+			                Audio.pause();
+			                Reducir();
+			            } catch (BasicPlayerException ex) {
+			                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+			            }
+			        }
 
+				}
+			});
 		
 		
 	
@@ -453,7 +490,7 @@ public VentanaPrincipal() {
 			                    
 			                    //Hace la llamada al metodo encargado de rellenar los JLbels....
 			               //     JLaEtiquetas(file);
-			        //            lblCaratula(file.toString());
+			                    CaratulaCancion(file.toString());
 			                    if (e.getClickCount()==2){
 			                        try {
 			                            bloquear=true;
@@ -461,9 +498,9 @@ public VentanaPrincipal() {
 			                            bloquear=false;
 			                        } catch (BasicPlayerException ex) {
 			                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);}
-			                        btnPlaypausa.doClick();
+			                        btnPlay.doClick();
 			                        if (Audio.getStatus()==2){
-			                            btnPlaypausa.doClick();
+			                            btnPlay.doClick();
 			                        }
 			                    }
 			                 }
@@ -562,7 +599,53 @@ public VentanaPrincipal() {
 				}
 			});
 			
-			
+			slider.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					 try {
+		                    slider.setValue(slider.getValue());
+		                    Audio.resume();
+		                    Audio.seek(slider.getValue());
+		                    Audio.setGain(volumen);
+		                    Audio.setPan(balance);
+		                    
+		                } catch (BasicPlayerException ex) {
+		                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex); }
+
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					 try {
+		                    Audio.pause();
+		                } catch (BasicPlayerException ex) {
+		                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+		                }
+		            
+
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			
 			
 		}
@@ -576,14 +659,14 @@ public VentanaPrincipal() {
 			// TODO Auto-generated method stub
 			if (!bloquear){
                 if (Audio.getStatus()==2 & repitaCancion){
-                	btnPlaypausa.doClick();
+                	btnPlay.doClick();
                 }
                 if (listaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
                     if (Audio.getStatus()==2 & siguiente){
                         int pista = listaCanciones.getAnchorSelectionIndex();                            
                         listaCanciones.setSelectedIndex(pista+1);
                         repaint();
-                        btnPlaypausa.doClick();
+                        btnPlay.doClick();
                     }
                 }
             }                
@@ -599,23 +682,23 @@ public VentanaPrincipal() {
 		@Override
 		public void progress(int i, long l, byte[] bytes, Map propiedades) {
 			// TODO Auto-generated method stub
-			// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
+			CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", lblTranscurrido);
 
                 Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
                 bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
-                pb.setValue((int)bytesTranscurrido);
+                slider.setValue((int)bytesTranscurrido);
 		}
 		
 		@Override
 		public void opened(Object o, Map map) {
 			// TODO Auto-generated method stub
-		//	 CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+			 CalculoSecundero(map.get("duration").toString(), "Duracion: ", lblDuracion);
                
             //   new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
               // new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
 
-               pb.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-               pb.setMinimum(0);
+               slider.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+               slider.setMinimum(0);
 		}
 		
 			});
@@ -632,14 +715,93 @@ public VentanaPrincipal() {
 	            } catch (BasicPlayerException ex) {
 	                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 	            }
-	            btnPlaypausa.doClick();
+	            btnPlay.doClick();
 	        }
 	    }
 		
+		public void Reducir() {
+			 Thread cerrar = new Thread(new Runnable() {
+	                @Override
+	                public void run() {
+	                    
+	                    for (int x=130;x>0;x--){
+	                    
+	                        try {
+	                            Thread.sleep(5);
+	                        } catch (InterruptedException ex) {    }
+	                        
+	                      	                }
+	                
+	                }
+	            });
+	            
+	            cerrar.start();
+	            
+	       
+	        }
+	            
+	            public void CaratulaCancion(String rut){    //Este metodo se encarga de leer las ediquetas del mp3 y obtener la imagen de la cancion mp3.
+	                Image img = null;        
+	                try { 
+	                    Mp3File Mp3A = new Mp3File(rut);
+	                    if (Mp3A.hasId3v2Tag()){
+	                        ID3v2 idTag = Mp3A.getId3v2Tag();
+	                        //idTag.clearFrameSet(ID3v24Tag.ID_IMAGE);  
+	                        byte[] datosImagen = idTag.getAlbumImage();               
+	                        img = ImageIO.read(new ByteArrayInputStream(datosImagen));
+	                    }
+	                    else {  //En el caso de que el mp3 no contenga imagen (establecemos una imagen por defecto..)
+	                        img = ImageIO.read(getClass().getResource("fondos/NoMusic.png"));					        
+	                    }
+	                } 
+	                catch (IllegalArgumentException | IOException ex1){System.out.printf("No Expecificas ruta"); }
+	                catch (NullPointerException e1) {System.out.println("No hay caratula en el mp3");
+	                 
+	                try {
+	                    //En el caso de que el mp3 no contenga imagen y lance una excepcion...(establecemos una imagen por defecto..)
+	                    img = ImageIO.read(getClass().getResource("fondos/NoMusic.png"));
+	                } 
+	                catch (IOException e) {}
+	                } 
+	                catch (UnsupportedTagException | InvalidDataException e) {}
+	                //Este codigo nos ayudara a reajustar la imagen a nuestro JLabel para que este se redimensione.....
+	                int ancho = img.getWidth(null);
+	                int alto = img.getHeight(null);       
+	                if (ancho>390){
+	                    ancho=390;
+	                } 
+	                if (alto>270){
+	                    alto=270;
+	                }
+	                
+	                img = img.getScaledInstance(ancho, alto,0);
+	                lblCaratula.setIcon(new ImageIcon(img));
+	                
+
+	            }
+	            
+	            
+	            
+	            public void CalculoSecundero(String milisegundos,String texto,JLabel label){
+	                try{
+	                    float horas,mint;
+	                    double milis = Double.parseDouble(milisegundos);
+	                    double segundostotal =  milis/1000000;                   //Almacenamos y pasamos a segundos los microsegundos obtenenidos.
+
+	                    horas = (int)segundostotal/3600;                        //Conversion de segundostotal a horas.
+	                    mint = (int)segundostotal/60-horas *60;                 //Conversion de segundostotal a minutos.
+	                    segundostotal= segundostotal-mint*60-horas*3600;        //Conversion de segundostotal a segundos.
+
+	                    String secundero = (int)horas + ":" +(int) mint +":"+ (int)segundostotal;//Creamos una variable String para almacenar el tiempo total horas, minutos, segundos.              
+
+	                  //  new JLaTexto(fuente1, texto+secundero, label, c2, 15);
+	                }catch(NumberFormatException e){
+	                    e.printStackTrace();
+	                }
+	            }
+		}
 		
-		
-	
-}
+
 
 		
 
