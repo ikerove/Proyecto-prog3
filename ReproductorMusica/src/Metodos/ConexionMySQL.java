@@ -8,12 +8,11 @@ import javax.swing.JOptionPane;
 public class ConexionMySQL {
 
 	
-		
-	 	private final String db = "usuario";
-	    private final String url = "jdbc:mysql://localhost:3306/"+db;
-	    private final String user = "root";
-	    private final String pass = "123";
-	    //private Connection link = null;
+		public String db = "usuarios";
+	    public String url = "jdbc:mysql://localhost:3306/"+db;
+	    public String user = "root";
+	    public String pass = "123";
+
 
 	   public Connection Conectar(){
 
@@ -21,9 +20,9 @@ public class ConexionMySQL {
 
 	       try{
 
-	           Class.forName("com.mysql.jdbc.Driver");
+	           Class.forName("org.gjt.mm.mysql.Driver");
 
-	           link = DriverManager.getConnection(url, user, pass);
+	           link = DriverManager.getConnection(this.url, this.user, this.pass);
 
 	       }catch(Exception ex){
 

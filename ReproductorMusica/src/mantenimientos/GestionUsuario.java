@@ -13,7 +13,6 @@ public class GestionUsuario {
 	public boolean	 registrarUsuario(Usuario usu) {
 		
 		Usuario usuario=null;
-		
 		Connection con=null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
