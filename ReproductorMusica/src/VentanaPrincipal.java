@@ -67,12 +67,15 @@ import org.jaudiotagger.tag.TagException;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "unchecked", "serial" })
 public class VentanaPrincipal extends JFrame  {
  //prueba
 	
 	 private Ecualizador_Graphics E_G;
 	 int E0,E1,E2,E3,E4,E5,E6,E7,E8,E9;
+	 
+	 private Map ElementosMap;
+	 float []eculi = new float [9];
 
 	 private JLabel lblTranscurrido = new JLabel("Transcurrido");
 	 private JLabel lblDuracion = new JLabel("Duracion");
@@ -99,6 +102,7 @@ public class VentanaPrincipal extends JFrame  {
 	private JPanel panel_2 = new JPanel();
 	private JPanel p2Arriba = new JPanel();
 	private JPanel p2Abajo = new JPanel();
+	private JPanel panelEcuali = new JPanel();
 	
 	/**
 	 * @wbp.nonvisual location=480,371
@@ -184,7 +188,8 @@ public class VentanaPrincipal extends JFrame  {
 	
 public VentanaPrincipal() {
 	
-		
+		E0=E1=E2=E3=E4=E5=E6=E7=E8=E9=0;
+		E_G = new Ecualizador_Graphics(panelEcuali);
 		
 		setBounds(100, 100, 573, 329);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -260,8 +265,12 @@ public VentanaPrincipal() {
 		p2Abajo.setBounds(0, 181, 577, 186);
 		panel_2.add(p2Abajo);
 		p2Abajo.setLayout(null);
-		lblCaratula.setBounds(6, 6, 178, 157);
+		lblCaratula.setBounds(6, 6, 228, 174);
 		p2Abajo.add(lblCaratula);
+		
+		
+		panelEcuali.setBounds(234, 6, 337, 174);
+		p2Abajo.add(panelEcuali);
 		p2Arriba.setLayout(null);
 		lblPlaylist.setBounds(48, 6, 264, 22);
 		
@@ -361,10 +370,13 @@ public VentanaPrincipal() {
 			           archivo = new File(ReproduceCancion);
 			         
 			           slider.setEnabled(true);
-				
-			           CaratulaCancion(archivo.toString());
-			           try {
-			               Audio.open(new File(ReproduceCancion));
+			           
+		               slider.setMaximum(100);
+		               slider.setMinimum(0);
+			           //CaratulaCancion(archivo.toString());
+		               Thread t2 =  new Thread(() -> {
+			               try {
+			        	   Audio.open(new File(ReproduceCancion));
 			               Audio.play();
 			               Audio.setGain(volumen);
 			               Audio.setPan(balance);
@@ -410,7 +422,25 @@ public VentanaPrincipal() {
 			               catch (CannotReadException ex1) {System.out.println(ex1);} 
 			               catch (BasicPlayerException ex1) {System.out.println(ex1);} 
 			               
-			           }  
+			           }
+		               });
+		               t2.start();
+		               
+			           Thread t1 = new Thread(() ->  {
+			        	   while(true) {
+			        		   slider.setValue(slider.getValue()+1);
+			        		   revalidate();
+			        		   repaint();
+			        		  // System.out.println(slider.getValue() + " : " + maxSize);
+			        		   try {
+								Thread.sleep(150);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+			        	   }
+			           });
+			           t1.start();
 			}
 				
 				 
@@ -665,6 +695,69 @@ public VentanaPrincipal() {
 		@Override
 		public void progress(int i, long l, byte[] bytes, Map propiedades) {
 			// TODO Auto-generated method stub
+			
+			 ElementosMap= propiedades;
+             
+             eculi = (float[]) ElementosMap.get("mp3.equalizer");
+             
+             eculi[0] = E0;
+             eculi[1] = E1;
+             eculi[2] = E2;
+             eculi[3] = E3;
+             eculi[4] = E4;
+             eculi[5] = E5;
+             eculi[6] = E6;
+             eculi[7] = E7;
+             eculi[8] = E8;
+             eculi[9] = E9;
+             
+             try{
+                 E_G.setE1(bytes[0]);
+                 E_G.setE2(bytes[106]);
+                 E_G.setE3(bytes[212]);
+                 E_G.setE4(bytes[318]);
+                 E_G.setE5(bytes[424]);
+                 E_G.setE6(bytes[530]);
+                 E_G.setE7(bytes[636]);
+                 E_G.setE8(bytes[742]);
+                 E_G.setE9(bytes[848]);
+                 E_G.setE10(bytes[954]);
+                 E_G.setE11(bytes[1060]);
+                 E_G.setE12(bytes[1066]);
+                 E_G.setE13(bytes[1272]);
+                 E_G.setE14(bytes[1378]);
+                 E_G.setE15(bytes[1484]);
+                 E_G.setE16(bytes[1590]);
+                 E_G.setE17(bytes[1696]);
+                 E_G.setE18(bytes[1802]);
+                 E_G.setE19(bytes[1908]);
+                 E_G.setE20(bytes[2014]);
+                 E_G.setE21(bytes[2120]);
+                 E_G.setE22(bytes[2226]);
+                 E_G.setE23(bytes[2332]);
+                 E_G.setE24(bytes[2438]);
+                 E_G.setE25(bytes[2544]);
+                 E_G.setE26(bytes[2650]);
+                 E_G.setE27(bytes[2756]);
+                 E_G.setE28(bytes[2862]);
+                 E_G.setE29(bytes[2968]);
+                 E_G.setE30(bytes[3074]);
+                 E_G.setE31(bytes[3180]);
+                 E_G.setE32(bytes[3286]);
+                 E_G.setE33(bytes[3392]);
+                 E_G.setE34(bytes[3498]);
+                 E_G.setE35(bytes[3604]);
+                 E_G.setE36(bytes[3710]);
+                 E_G.setE37(bytes[3816]);
+                 E_G.setE38(bytes[3922]);
+                 E_G.setE39(bytes[4028]);
+                 E_G.setE40(bytes[4134]);
+                 E_G.setE41(bytes[4240]);
+                 E_G.setE42(bytes[4346]);
+                 E_G.setE43(bytes[4600]);
+
+                 E_G.Repintado();
+             }catch(ArrayIndexOutOfBoundsException e){System.out.println("Error"+e);}
 			CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", lblTranscurrido);
 
                 Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
@@ -763,7 +856,59 @@ public VentanaPrincipal() {
 	                        try {
 	                            Thread.sleep(5);
 	                        } catch (InterruptedException ex) {    }
+	                        E_G.setE1(x);                 
+	                        E_G.setE2(x);                   
+	                        E_G.setE3(x);  
+	                        E_G.setE4(x); 
+	                        E_G.setE5(x); 
+	                        E_G.setE6(x); 
+	                        E_G.setE7(x); 
+	                        E_G.setE8(x); 
+	                        E_G.setE9(x); 
+	                        E_G.setE10(x); 
+	                        E_G.setE11(x); 
+	                        E_G.setE12(x);
+	                        E_G.setE13(x); 
+	                        E_G.setE14(x); 
+	                        E_G.setE15(x);
+	                        E_G.setE16(x);
+	                        E_G.setE17(x);
+	                        E_G.setE18(x);
+	                        E_G.setE19(x);
+	                        E_G.setE20(x);
+	                        E_G.setE21(x);
+	                        E_G.setE22(x);
+	                        E_G.setE23(x);
+	                        E_G.setE24(x);
+	                        E_G.setE25(x);
+	                        E_G.setE26(x);
+	                        E_G.setE27(x);
+	                        E_G.setE28(x);
+	                        E_G.setE29(x);
+	                        E_G.setE30(x);
+	                        E_G.setE31(x);
+	                        E_G.setE32(x);
+	                        E_G.setE33(x);
+	                        E_G.setE34(x);
+	                        E_G.setE35(x);
+	                        E_G.setE36(x);
+	                        E_G.setE37(x);
+	                        E_G.setE38(x);
+	                        E_G.setE39(x);
+	                        E_G.setE40(x);
+	                        E_G.setE41(x);
+	                        E_G.setE42(x);
+	                        E_G.setE43(x);
+	                        //E_G.setE44(x);
+	                        //E_G.setE45(x);
+	                        //E_G.setE46(x);
+	                        //E_G.setE47(x);
+	                        //E_G.setE48(x);
+	                        //E_G.setE49(x);
+	                        //E_G.setE50(x);
 	                        
+	                        
+	                        E_G.Repintado();
 	                      	                }
 	                
 	                }
