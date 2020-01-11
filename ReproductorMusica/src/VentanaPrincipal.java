@@ -67,6 +67,7 @@ import org.jaudiotagger.tag.TagException;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 
+@SuppressWarnings("serial")
 public class VentanaPrincipal extends JFrame  {
  //prueba
 	
@@ -141,7 +142,7 @@ public class VentanaPrincipal extends JFrame  {
 	 private Tag tag; 
 	 private  AudioFile audiofile = new AudioFile();
 	 
-	 private String ruta = "/Users/ikerrodriguez";
+	 private String ruta = "/Users/ikerrodriguez/Music";
 	 private final JFileChooser abrirFile  = new JFileChooser(new File(ruta));
 	
 	
@@ -213,7 +214,7 @@ public VentanaPrincipal() {
 		p1Arriba.setBounds(5, 5, 103, 181);
 		
 		panel_1.add(p1Arriba);
-		p1Abajo.setBounds(5, 186, 65, 181);
+		p1Abajo.setBounds(5, 186, 103, 181);
 		panel_1.add(p1Abajo);
 		p1Abajo.setLayout(null);
 		p1Arriba.setLayout(null);
@@ -221,6 +222,33 @@ public VentanaPrincipal() {
 		
 		
 		p1Arriba.add(lblUnidad);
+		
+		JButton btnNoefecto = new JButton("NoEfecto");
+		btnNoefecto.setBounds(5, 31, 117, 29);
+		p1Arriba.add(btnNoefecto);
+		
+		btnNoefecto.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				  E0 = 0; E1 = 0;E2 = 0;E3 = 0;E4 = 0;E5 = 0;E6 = 0;E7 = 0; E8 = 0;E9 = 0;           
+			}
+		});
+		
+		JButton btnEfecto1 = new JButton("Efecto1");
+		btnEfecto1.setBounds(5, 74, 117, 29);
+		p1Arriba.add(btnEfecto1);
+		
+		btnEfecto1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 E0 = 70;E1 = 80;E2 = 80;E3 = 80;E4 = 80;E5 = 60;E6 = 60;E7 = 60;E8 = 60;E9 = 60;            
+			}
+		});
+		
 		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel_1);
 		panel_2.setBounds(110, 0, 591, 373);
@@ -309,7 +337,8 @@ public VentanaPrincipal() {
 		slider.setValue(0);
 		slider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		
-		lblTranscurrido.setBounds(50, 6, 61, 16);
+		
+		lblTranscurrido.setBounds(6, 6, 105, 16);
 		p4Abajo.add(lblTranscurrido);
 		
 		
@@ -599,53 +628,7 @@ public VentanaPrincipal() {
 				}
 			});
 			
-			slider.addMouseListener(new MouseListener() {
-				
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					 try {
-		                    slider.setValue(slider.getValue());
-		                    Audio.resume();
-		                    Audio.seek(slider.getValue());
-		                    Audio.setGain(volumen);
-		                    Audio.setPan(balance);
-		                    
-		                } catch (BasicPlayerException ex) {
-		                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex); }
-
-				}
-				
-				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					 try {
-		                    Audio.pause();
-		                } catch (BasicPlayerException ex) {
-		                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-		                }
-		            
-
-				}
-				
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			
 			
 			
 		}
@@ -702,9 +685,60 @@ public VentanaPrincipal() {
 		}
 		
 			});
+		}
+	
+	public void Sliders() {
+	
+	slider.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			 try {
+                    slider.setValue(slider.getValue());
+                    Audio.resume();
+                    Audio.seek(slider.getValue());
+                    Audio.setGain(volumen);
+                    Audio.setPan(balance);
+                    
+                } catch (BasicPlayerException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex); }
+
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			 try {
+                    Audio.pause();
+                } catch (BasicPlayerException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
 	}
 		
-		public void Comprovacion(int opera){
+	public void Comprovacion(int opera){
 	        int indice = listaCanciones.getSelectedIndex();        
 	        if (archivo!=null & indice!=-1 & Audio.getStatus()==0){
 	            //El metodo getAnchotSelectionIndex obtenemos el numero de posicion en el que se encuentra el JList...
