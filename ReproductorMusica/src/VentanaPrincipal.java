@@ -785,7 +785,7 @@ public VentanaPrincipal() {
 	                        img = ImageIO.read(new ByteArrayInputStream(datosImagen));
 	                    }
 	                    else {  //En el caso de que el mp3 no contenga imagen (establecemos una imagen por defecto..)
-	                        img = ImageIO.read(getClass().getResource("fondos/NoMusic.png"));					        
+	                        img = ImageIO.read(getClass().getResource("Fondos/NoMusic.png"));					        
 	                    }
 	                } 
 	                catch (IllegalArgumentException | IOException ex1){System.out.printf("No Expecificas ruta"); }
