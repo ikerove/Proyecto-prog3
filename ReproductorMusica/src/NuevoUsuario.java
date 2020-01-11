@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import ConectorBD.MySQLConexion;
 import mantenimientos.GestionUsuario;
+import mantenimientos.Usuario;
 import mantenimientos.hash;
 
 import java.awt.GridLayout;
@@ -25,8 +26,8 @@ import javax.swing.JPasswordField;
 public class NuevoUsuario extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt5;
-	private JTextField txt1;
+	private JTextField txtCorreo;
+	private JTextField txtUsuario;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
@@ -58,11 +59,11 @@ public class NuevoUsuario extends JFrame {
 	 */
 	public NuevoUsuario() {
 		
-		/*	JFrame l = this;
-		Logueo = lo;*/
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 467, 317);
+		setSize(460, 320);
+		setResizable(false);
+		setLocationRelativeTo (null);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,19 +78,19 @@ public class NuevoUsuario extends JFrame {
 		lblNewLabel.setBounds(41, 143, 122, 27);
 		panel.add(lblNewLabel);
 		
-		txt5 = new JTextField();
-		txt5.setBounds(189, 141, 226, 31);
-		panel.add(txt5);
-		txt5.setColumns(10);
+		txtCorreo = new JTextField();
+		txtCorreo.setBounds(189, 141, 226, 31);
+		panel.add(txtCorreo);
+		txtCorreo.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Usuario:");
 		lblNewLabel_1.setBounds(41, 10, 122, 27);
 		panel.add(lblNewLabel_1);
 		
-		txt1 = new JTextField();
-		txt1.setBounds(189, 8, 134, 31);
-		panel.add(txt1);
-		txt1.setColumns(10);
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(189, 8, 134, 31);
+		panel.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
 		lblNewLabel_2 = new JLabel("Contrasena:");
 		lblNewLabel_2.setBounds(41, 52, 122, 27);
@@ -126,20 +127,20 @@ public class NuevoUsuario extends JFrame {
 				// TODO Auto-generated method stub
 				
 				GestionUsuario modSql = new GestionUsuario();
-				Usuarios mod = new Usuarios();
+				Usuario mod = new Usuario();
 				
-				String pass =new String(txtpassword.getContrasenya_usuario());
-				String passCon = new String(( txtpassword2).getContrasenya_usuario());
+				String pass =new String(txtpassword.getPassword());
+				String passCon = new String(txtpassword2.getPassword());
 				
 				if(pass.equals(passCon)) {
 					String nuevoPass = hash.sha1(pass);
 					
-					mod.setNombre_usuario.getText();
+					mod.setNombre_usuario(txtUsuario.getText());
 					mod.setContrasenya_usuario(nuevoPass);
-					mod.setCorreo_usuario.getText();
+					mod.setCorreo_usuario(txtCorreo.getText());
 					mod.setTipo_usuario(1);
 				
-					if(modSql.registrar(mod)) {
+					if(modSql.registrarUsuario(mod)) {
 						JOptionPane.showMessageDialog(null, "Nuevo Usuario creado");
 						limpiar();
 					}else {
@@ -157,8 +158,8 @@ public class NuevoUsuario extends JFrame {
 
 			} 
 			private void limpiar() {
-				txt1.setText("");
-				txt5.setText("");
+				txtUsuario.setText("");
+				txtCorreo.setText("");
 				txtpassword.setText("");
 				txtpassword2.setText("");
 			}
