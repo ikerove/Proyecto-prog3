@@ -5,6 +5,7 @@ Login
  NUEVO USUARIO
 
 VENTANA PRINCIPAL
+-Antes de nada modificar la variable String ruta = "/Users/La carpeta en la que esté su musica".
 
 -Para poder abrir las canciones deseadas se pueden realizar de dos maneras:
   1. Boton Directorio: Buscas la carpeta de musica entre tus archivos del ordenador
