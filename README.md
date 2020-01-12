@@ -2,7 +2,11 @@
 
 Login
 
+-Para loguearte hay que meter un usuario existente, si no se tiene uno se puede crear dandole a botón que hay más abajo. Uno de los usuarios predeterminados es admin/admin. Al darle al boton de crear nuevo usuario nos llevará a la ventana de nuevo usuario.
+
  NUEVO USUARIO
+
+-Para crear un usuario nuevo rellenamos las credenciales correctamente y le damos al botón de registrarse. Debemos poner la contraseña en ambos campos igual si no, nos saltará un error que nos indica que las contraseñas no son iguales.
 
 VENTANA PRINCIPAL
 
