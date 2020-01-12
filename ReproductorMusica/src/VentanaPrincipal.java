@@ -69,8 +69,8 @@ import javax.swing.JSlider;
 
 @SuppressWarnings({ "unchecked", "serial" })
 public class VentanaPrincipal extends JFrame  {
- //prueba
-	
+ 
+	//iniciar las variables
 	 private Ecualizador_Graphics E_G;
 	 int E0,E1,E2,E3,E4,E5,E6,E7,E8,E9;
 	 
@@ -167,7 +167,7 @@ public class VentanaPrincipal extends JFrame  {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -354,6 +354,9 @@ public VentanaPrincipal() {
 		lblDuracion.setBounds(498, 6, 61, 16);
 		p4Abajo.add(lblDuracion);
 		getContentPane().add(panel_4);
+		
+		
+		// Funcionalidad de botones
 		
 		
 		btnPlay.addActionListener(new ActionListener() {
@@ -548,7 +551,7 @@ public VentanaPrincipal() {
 			                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex); }
 			                    
 			                    //Hace la llamada al metodo encargado de rellenar los JLbels....
-			               //     JLaEtiquetas(file);
+			           
 			                    CaratulaCancion(file.toString());
 			                    if (e.getClickCount()==2){
 			                        try {
@@ -599,7 +602,7 @@ public VentanaPrincipal() {
 			                    System.out.println("Error no hay archivo el argumento es "+archivo);
 			                }                     
 			                ruta = abrirFile.getCurrentDirectory().toString();
-			              //  new JLaTexto(fuente1, "Ruta: "+ ruta,jLabelRuta , Color.WHITE, 15);
+			           
 			              
 			                datos.add(archivo.toString());
 			                
@@ -612,7 +615,7 @@ public VentanaPrincipal() {
 			                    x++;
 			                }
 			                listaCanciones.setListData(agregaCanciones);
-			              //  JLaEtiquetas(archivo);
+			           
 			            }   
 			            
 			        }   
@@ -630,7 +633,7 @@ public VentanaPrincipal() {
 			        abrirFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//Accederemos solamente a directorios.
 			        if (abrirFile.showOpenDialog(p3Arriba)==0){
 			            ruta = abrirFile.getSelectedFile().toString();
-			           // new JLaTexto(fuente1, "Ruta: "+ ruta,jLabelRuta , Color.WHITE, 15); 
+			         
 				}
 				}
 				});
@@ -647,7 +650,7 @@ public VentanaPrincipal() {
 			            archivo = new File(ruta);
 			            
 			           Cancion agre = new Cancion(agregaCanciones, archivo, datos, listaCanciones);         
-			         //  new JLaTexto(fuente1, "Total: "+datos.size(), jLabelTotal, Color.WHITE, 15);
+			        
 			           agregaCanciones= agre.agregaGet();
 			           if (archivo!=null){
 			        	   listaCanciones.setSelectedIndex(0);
@@ -663,6 +666,7 @@ public VentanaPrincipal() {
 			
 		}
 
+	//	Metodos
 
 	public void basic_playerlistener() {
 		Audio.addBasicPlayerListener(new BasicPlayerListener() {
@@ -770,8 +774,7 @@ public VentanaPrincipal() {
 			// TODO Auto-generated method stub
 			 CalculoSecundero(map.get("duration").toString(), "Duracion: ", lblDuracion);
                
-            //   new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
-              // new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
+          
 
                slider.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
                slider.setMinimum(0);
@@ -929,7 +932,7 @@ public VentanaPrincipal() {
 	                        byte[] datosImagen = idTag.getAlbumImage();               
 	                        img = ImageIO.read(new ByteArrayInputStream(datosImagen));
 	                    }
-	                    else {  //En el caso de que el mp3 no contenga imagen (establecemos una imagen por defecto..)
+	                    else {  //En el caso de que el mp3 no contenga imagen (establecemos una imagen por defecto)
 	                        img = ImageIO.read(getClass().getResource("Fondos/NoMusic.png"));					        
 	                    }
 	                } 
@@ -937,13 +940,13 @@ public VentanaPrincipal() {
 	                catch (NullPointerException e1) {System.out.println("No hay caratula en el mp3");
 	                 
 	                try {
-	                    //En el caso de que el mp3 no contenga imagen y lance una excepcion...(establecemos una imagen por defecto..)
+	                  
 	                    img = ImageIO.read(getClass().getResource("fondos/NoMusic.png"));
 	                } 
 	                catch (IOException e) {}
 	                } 
 	                catch (UnsupportedTagException | InvalidDataException e) {}
-	                //Este codigo nos ayudara a reajustar la imagen a nuestro JLabel para que este se redimensione.....
+	               
 	                int ancho = img.getWidth(null);
 	                int alto = img.getHeight(null);       
 	                if (ancho>390){
@@ -973,7 +976,7 @@ public VentanaPrincipal() {
 
 	                    String secundero = (int)horas + ":" +(int) mint +":"+ (int)segundostotal;//Creamos una variable String para almacenar el tiempo total horas, minutos, segundos.              
 
-	                  //  new JLaTexto(fuente1, texto+secundero, label, c2, 15);
+	                  
 	                }catch(NumberFormatException e){
 	                    e.printStackTrace();
 	                }
