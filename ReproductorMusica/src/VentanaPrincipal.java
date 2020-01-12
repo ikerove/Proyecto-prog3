@@ -24,7 +24,7 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
-import Interfaces.Ecualizador_Graphics;
+//import Interfaces.Ecualizador_Graphics;
 import Musica.Cancion;
 
 import java.awt.Color;
@@ -112,9 +112,9 @@ public class VentanaPrincipal extends JFrame  {
 	private JPanel p3Abajo = new JPanel();
 	
 	
-	private JLabel lblUnidad = new JLabel("Unidad");
+	private JLabel lblUnidad = new JLabel("Efectos");
 	private JLabel lblPlaylist = new JLabel("Playlist");
-	private JLabel lblAmigos = new JLabel("Amigos");
+	private JLabel lblAmigos = new JLabel("Archivos");
 	/**
 	 * @wbp.nonvisual location=340,391
 	 */
@@ -189,7 +189,7 @@ public class VentanaPrincipal extends JFrame  {
 public VentanaPrincipal() {
 	
 		E0=E1=E2=E3=E4=E5=E6=E7=E8=E9=0;
-		E_G = new Ecualizador_Graphics(panelEcuali);
+	//	E_G = new Ecualizador_Graphics(panelEcuali);
 		
 		setBounds(100, 100, 573, 329);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -229,7 +229,7 @@ public VentanaPrincipal() {
 		p1Arriba.add(lblUnidad);
 		
 		JButton btnNoefecto = new JButton("NoEfecto");
-		btnNoefecto.setBounds(5, 31, 117, 29);
+		btnNoefecto.setBounds(5, 32, 96, 24);
 		p1Arriba.add(btnNoefecto);
 		
 		btnNoefecto.addActionListener(new ActionListener() {
@@ -242,7 +242,7 @@ public VentanaPrincipal() {
 		});
 		
 		JButton btnEfecto1 = new JButton("Efecto1");
-		btnEfecto1.setBounds(5, 74, 117, 29);
+		btnEfecto1.setBounds(0, 79, 107, 24);
 		p1Arriba.add(btnEfecto1);
 		
 		btnEfecto1.addActionListener(new ActionListener() {
@@ -371,9 +371,9 @@ public VentanaPrincipal() {
 			         
 			           slider.setEnabled(true);
 			           
-		               slider.setMaximum(100);
+		               slider.setMaximum(5000);
 		               slider.setMinimum(0);
-			           //CaratulaCancion(archivo.toString());
+			           CaratulaCancion(archivo.toString());
 		               Thread t2 =  new Thread(() -> {
 			               try {
 			        	   Audio.open(new File(ReproduceCancion));
