@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import mantenimientos.GestionUsuario;
-import mantenimientos.SqlUsuarios;
 import mantenimientos.Usuario;
 
 import java.awt.Font;
