@@ -18,7 +18,7 @@ public class MySQLConexion {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url ="jdbc:mysql://localhost/BD_Proyecto";
+			String url ="jdbc:mysql://localhost:3306/bd_proyecto";
 			String usuario = "root";
 			String contrasena = "";
 			
@@ -36,26 +36,24 @@ public class MySQLConexion {
 	        connection = null;
 	}
 }
-/*	public static Connection getConexion() {
-		
-		Connection con = null;
+/*
+	private final String base = "usuario";
+	private final String user = "admin";
+	private final String password = "";
+	private final String url = "jdbc:mysql://localhost:3306/"+base;
+	private Connection con = null;
+	
+	public Connection getConexion() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url ="jdbc:mysql://localhost/BD_Proyecto";
-			String usuario = "root";
-			String contrasena = "";
+			con = DriverManager.getConnection(url,user,password);
 			
-			con = DriverManager.getConnection(url,usuario,contrasena);
-			
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al cargar el Driver");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("Error al conectar con la Base de Datos");
- 			e.printStackTrace();
 		}
-		
-		
 		return con;
+		
+		
 	}
 }*/

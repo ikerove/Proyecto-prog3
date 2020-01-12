@@ -7,18 +7,18 @@ package mantenimientos;
 	private String nombre_usuario;
     private int tipo_usuario;
     private String contrasenya_usuario;
-    private String correo_usuario;
+    private String correo;
 	
     public Usuario (){
     	super();
     }
-    public Usuario(int idUsuario, String nombre_usuario, int tipo_usuario, String contrasenya_usuario, String correo_usuario) {
+    public Usuario(int idUsuario, String nombre_usuario, int tipo_usuario, String contrasenya_usuario, String correo) {
     	super();
     	this.idUsuario = idUsuario;
     	this.nombre_usuario = nombre_usuario;
     	this.tipo_usuario = tipo_usuario;
     	this.contrasenya_usuario = contrasenya_usuario;
-    	this.correo_usuario = correo_usuario;
+    	this.correo = correo;
     }	
     public int getIdUsuario() {
     	return idUsuario;
@@ -49,10 +49,10 @@ package mantenimientos;
 	}
     
 	public String getCorreo_usuario() {
-		return correo_usuario;
+		return correo;
 	}
 	public void setCorreo_usuario(String correo_usuario) {
-		this.correo_usuario = correo_usuario;
+		this.correo = correo;
 	}
 	
 	

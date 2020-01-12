@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import ConectorBD.MySQLConexion;
 import mantenimientos.GestionUsuario;
+import mantenimientos.SqlUsuarios;
 import mantenimientos.Usuario;
 import mantenimientos.hash;
 
@@ -126,7 +127,7 @@ public class NuevoUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				GestionUsuario modSql = new GestionUsuario();
+				SqlUsuarios modSql = new SqlUsuarios();
 				Usuario mod = new Usuario();
 				
 				String pass =new String(txtpassword.getPassword());

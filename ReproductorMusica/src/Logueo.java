@@ -1,6 +1,5 @@
 
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,16 +13,20 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import mantenimientos.GestionUsuario;
+import mantenimientos.SqlUsuarios;
 import mantenimientos.Usuario;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Logueo extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel btnLoguear;
 	private JPasswordField jpassClave;
 	private JTextField textUser;
@@ -91,10 +94,11 @@ public class Logueo extends JFrame {
 				
 				//char [] contrasena = jpassClave.getPassword();
 				//String contrasenaFinal = new String (contrasena);
-				String contrasenaFinal = String.valueOf(jpassClave.getPassword());
 				String user = textUser.getText();
+				String contrasenaFinal = String.valueOf(jpassClave.getPassword());
 				
 				GestionUsuario gestionUsuario = new GestionUsuario();
+				SqlUsuarios sqlUsuarios = new SqlUsuarios();
 				
 				Usuario usuario2 = new Usuario();
 				usuario2.setNombre_usuario(user);
