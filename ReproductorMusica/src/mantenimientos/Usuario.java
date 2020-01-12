@@ -51,7 +51,7 @@ package mantenimientos;
 	public String getCorreo_usuario() {
 		return correo;
 	}
-	public void setCorreo_usuario(String correo_usuario) {
+	public void setCorreo_usuario(String correo) {
 		this.correo = correo;
 	}
 	

@@ -18,7 +18,7 @@ public class MySQLConexion {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url ="jdbc:mysql://localhost:3306/bd_proyecto";
+			String url ="jdbc:mysql://localhost:3306/BD_Proyecto";
 			String usuario = "root";
 			String contrasena = "";
 			

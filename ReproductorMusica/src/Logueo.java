@@ -98,7 +98,7 @@ public class Logueo extends JFrame {
 				String contrasenaFinal = String.valueOf(jpassClave.getPassword());
 				
 				GestionUsuario gestionUsuario = new GestionUsuario();
-				SqlUsuarios sqlUsuarios = new SqlUsuarios();
+				
 				
 				Usuario usuario2 = new Usuario();
 				usuario2.setNombre_usuario(user);
